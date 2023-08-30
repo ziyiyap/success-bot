@@ -1,4 +1,4 @@
-const { Client, IntentsBitField } = require('discord.js');
+const { Client, IntentsBitField, ActivityType } = require('discord.js');
 
 const client = new Client({
     intents: [
@@ -16,6 +16,12 @@ const config = {
 
 client.on('ready', (c) => {
     console.log(`One must imagine ${c.user.username} happy.`);
+    client.user.setPresence({ status: 'dnd' });
+
+    client.user.setActivity({
+        name: "Rolling a boulder.",
+        type: ActivityType.Playing,
+    })
 });
 
 client.on("interactionCreate", async interaction => {
