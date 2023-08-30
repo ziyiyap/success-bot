@@ -18,20 +18,18 @@ client.on('ready', (c) => {
     console.log(`One must imagine ${c.user.username} happy.`);
 });
 
-client.on('messageCreate', async message => {
-    if (message.author.bot) {
-        return;
-    }
+client.on("interactionCreate", async interaction => {
+    if (!interaction.isChatInputCommand()) return;
 
-    if (message.content === 'ping') {
+    if (interaction.commandName === 'ping') {
         const startTime = Date.now();
-        const pingMessage = await message.reply('Pinging...');
+        const pingMessage = await interaction.reply('Pinging...');
         const endTime = Date.now();
 
         const latency = endTime - startTime;
 
         pingMessage.edit(`Pong! 🏓\nLatency: ${latency}ms`);
     }
-});
+})
 
 client.login(config.token)
