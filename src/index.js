@@ -18,4 +18,20 @@ client.on('ready', (c) => {
     console.log(`One must imagine ${c.user.username} happy.`);
 });
 
+client.on('messageCreate', async message => {
+    if (message.author.bot) {
+        return;
+    }
+
+    if (message.content === 'ping') {
+        const startTime = Date.now();
+        const pingMessage = await message.reply('Pinging...');
+        const endTime = Date.now();
+
+        const latency = endTime - startTime;
+
+        pingMessage.edit(`Pong! 🏓\nLatency: ${latency}ms`);
+    }
+});
+
 client.login(config.token)
