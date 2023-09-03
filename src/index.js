@@ -1,4 +1,4 @@
-const { Client, IntentsBitField, ActivityType } = require('discord.js');
+const { Client, IntentsBitField, ActivityType, EmbedBuilder, Embed } = require('discord.js');
 
 const client = new Client({
     intents: [
@@ -29,12 +29,19 @@ client.on("interactionCreate", async interaction => {
 
     if (interaction.commandName === 'ping') {
         const startTime = Date.now();
-        const pingMessage = await interaction.reply('Pinging...');
+        const embed = new EmbedBuilder().setTitle("Pinging...").setColor("Random")
+        const pingMessage = await interaction.reply({embeds : [embed] });
         const endTime = Date.now();
 
         const latency = endTime - startTime;
+        const pingembed = new EmbedBuilder().setTitle('Pong! 🏓').setDescription(`Latency: ${latency}ms`).setColor("Random")
 
-        pingMessage.edit(`Pong! 🏓\nLatency: ${latency}ms`);
+        pingMessage.edit({embeds : [pingembed] });
+    }
+
+    if (interaction.commandName === 'hello') {
+        const startTime = Date.now();
+        await interaction.reply('Hi');
     }
 })
 

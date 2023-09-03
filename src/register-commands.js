@@ -6,6 +6,10 @@ const commands = [
         name: 'ping',
         description: "Checks bot's latency",
     },
+    {
+        name: 'hello',
+        description: 'says hi!',
+    }
 ];
 
 const rest = new REST({ version: '10'}).setToken(process.env.TOKEN);
