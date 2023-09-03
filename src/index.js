@@ -1,4 +1,5 @@
 const { Client, IntentsBitField, ActivityType, EmbedBuilder, Embed } = require('discord.js');
+const eventHandler = require('./handlers/eventHandler');
 
 const client = new Client({
     intents: [
@@ -14,15 +15,7 @@ const config = {
     token: process.env.TOKEN,
 }
 
-client.on('ready', (c) => {
-    console.log(`One must imagine ${c.user.username} happy.`);
-    client.user.setPresence({ status: 'dnd' });
-
-    client.user.setActivity({
-        name: "Rolling a boulder.",
-        type: ActivityType.Playing,
-    })
-});
+eventHandler(client);
 
 client.on("interactionCreate", async interaction => {
     if (!interaction.isChatInputCommand()) return;
